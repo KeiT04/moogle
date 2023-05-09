@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -22,5 +25,7 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+MoogleEngine.Data.DataBase.Loading("Contenido");
 
 app.Run();
