@@ -7,7 +7,7 @@ public static class Moogle
         string[] terms = Aux.tokenizer(query).Split();
         Data.DataBase.EjecutarQuery(terms);
         
-        int max = 5;
+        int max = Data.DataBase.docs.Length;
         
         for(int i = 0; i < max; i ++)
         {
