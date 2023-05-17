@@ -10,6 +10,9 @@
 ##Especificaciones
 
 -El proyecto *deberia* funcionar en Windows siguiendo los mismos pasos anteriores. Con los constantes cambios realizados al proyecto y el limitado tiempo para comprobarlo en ese SO no se tiene garantia de que funcione con las versiones mas actualizadas del proyecto.
+
 -Los archivos utilizados donde la fase de pruebas para comprobar el funcionamiento del moogle estaban todos en ingles, en caso de probar archivos en otro idioma se espera se obtengan resultados igual de satisfactorios.
+
 -NO se ha comprobado el limite de la cantidad de archivos que pueda aguantar el proyecto, se estima que pueda aguantar hasta alrededor de 4000 archivos.
+
 -Tenga en cuenta que mientras mas documentos usted introduzca en la carpeta mas tardara en cargar la base de datos.
