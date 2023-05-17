@@ -3,7 +3,7 @@ namespace MoogleEngine;
 public class Document
 {
     public string route;
-    public Vectorizing Vd;
+    public Vectorizing VecDoc;
     public double score;
 
     public Document(string route)
@@ -13,7 +13,7 @@ public class Document
 
     public void GetScore(Vectorizing Vec)
     {
-        this.score = Vec * this.Vd;
+        this.score = Vec * this.VecDoc;
     }
 
     public string GetTitle()
@@ -30,9 +30,9 @@ public class Document
         
         foreach (string word in query)
         {
-            if(Vd.v.ContainsKey(word) && Vd[word] > maxweigth)
+            if(VecDoc.v.ContainsKey(word) && VecDoc[word] > maxweigth)
             {
-                maxweigth = Vd[word];
+                maxweigth = VecDoc[word];
                 pointerword = word;
             }            
         }    

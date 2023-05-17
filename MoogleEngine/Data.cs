@@ -19,11 +19,10 @@ public class DB
     }
     public void SearchFiles(string dir)
     {   
-        dir = Path.Combine(Directory.GetCurrentDirectory(), "..", dir);
-        IEnumerable<string> routes = Directory.EnumerateFiles(dir, "*txt", SearchOption.AllDirectories);
+        dir = Directory.GetCurrentDirectory().Replace("MoogleServer", dir);
+        IEnumerable<string> routes = Directory.EnumerateFiles(dir);
         this.docs = new Document[routes.Count()];
-        
-        for(int i = 0; i < this.docs.Length ; i++)
+        for(int i = 0; i < this.docs.Length; i++)
         {
             docs[i] = new Document(routes.ElementAt(i));
         }
@@ -38,7 +37,7 @@ public class DB
             foreach (string w in text)
             {
                 if( !Contenido.ContainsKey(w))
-                    Contenido[w] = new Dictionary <int , int>() ; 
+                    Contenido[w] = new Dictionary <int , int>(); 
                 
                 if(!Contenido[w].ContainsKey(i))
                 Contenido[w].Add(i , 0);
@@ -52,16 +51,16 @@ public class DB
     {
         for(int i = 0; i < docs.Length; i++)
         {
-            docs[i].Vd = new Vectorizing();
+            docs[i].VecDoc = new Vectorizing();
 
             int maxfq = Aux.MaxFq(Contenido , i);
             foreach(string word in Contenido.Keys)
             {
                 if(Contenido[word].ContainsKey(i))
                 {
-                    double tf = Contenido[word][i] / (maxfq + 1.0) ;
+                    double tf = Contenido[word][i] / (maxfq + 1.0);
                     double idf = Math.Log10((docs.Length + 1.0)/(Contenido[word].Count + 1.0));
-                    docs[i].Vd[word] = tf * idf ;
+                    docs[i].VecDoc[word] = tf * idf;
                 }
             }
         }
@@ -71,28 +70,29 @@ public class DB
     {
         CreateVec(query);
     
-        for(int i = 0 ; i < docs.Length ; i++)
-            docs[i].GetScore(Vec) ;
-    
+        for(int i = 0; i < docs.Length; i++)
+        {
+            docs[i].GetScore(Vec);
+        }
         Aux.Manage(docs);
     }
 
     public void CreateVec(string[] query)
     {
         this.Vec = new Vectorizing();
-        int maxfq = Aux.MaxFq(query) ;
+        int maxfq = Aux.MaxFq(query);
 
         foreach (string word in query)
         {
-            if(!Vec.v.ContainsKey(word)) //(para no ingresar nuevamente palabras repetidas)
+            if(!Vec.v.ContainsKey(word))
             {
-                int nj = 0 ;
-                if(Contenido.ContainsKey(word)) nj = (Contenido[word].Count) ;
-                else nj  = docs.Length ;
+                int nj = 0;
+                if(Contenido.ContainsKey(word)) nj = (Contenido[word].Count);
+                else nj  = docs.Length;
   
                 double tf = query.Count(s => s == word) / (maxfq + 1.0);
-                double idf = Math.Log10( (docs.Length + 1.0) / ( nj + 1.0) );
-                Vec[word] = tf * idf ;
+                double idf = Math.Log10((docs.Length + 1.0) / ( nj + 1.0));
+                Vec[word] = tf * idf;
             }
         }       
     }    

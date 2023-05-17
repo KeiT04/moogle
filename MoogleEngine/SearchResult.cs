@@ -6,7 +6,8 @@ public class SearchResult
 
     public SearchResult(SearchItem[] items, string suggestion = "")
     {
-        if (items == null) {
+        if (items == null) 
+        {
             throw new ArgumentNullException("items");
         }
 

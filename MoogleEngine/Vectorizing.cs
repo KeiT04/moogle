@@ -2,7 +2,7 @@ namespace MoogleEngine;
 
 public class Vectorizing
 {
-    public Dictionary <string , double > v;
+    public Dictionary <string , double> v;
 
     public Vectorizing()
     {
@@ -18,7 +18,7 @@ public class Vectorizing
 
         set
         {
-            v[j] = value ;
+            v[j] = value;
         }
     }
 
@@ -28,10 +28,13 @@ public class Vectorizing
         double Norms = Q.GetNorma() * D.GetNorma();
         
         if(Norms == 0)
+        {
             return 0;
-        
-        else 
-            return ProductEsc / (Norms);           
+        }
+        else
+        { 
+            return ProductEsc / (Norms);    
+        }       
     }
 
     public static double EscalarProduct(Vectorizing Q , Vectorizing D)
@@ -40,7 +43,9 @@ public class Vectorizing
         foreach(string word in Q.v.Keys)
         {
             if(D.v.ContainsKey(word))
+            {
                 suma += Q[word] * D[word];
+            }
         }
         return suma;
     }

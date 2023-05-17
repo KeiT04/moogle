@@ -54,7 +54,7 @@ public class Aux
             if(taken[j] == false)
             {
                 int rep = 1 ;
-                for(int i = j + 1; i < arr.Length; i ++ )
+                for(int i = j + 1; i < arr.Length; i ++)
                 {
                     if(arr[i] == arr[j])
                     {
@@ -70,7 +70,7 @@ public class Aux
 
     public static int Find(string word, string[] text)
     {
-        for(int j = 0; j < text.Length; j++ )
+        for(int j = 0; j < text.Length; j++)
         {
             if(word == Aux.tokenizer(text[j]))
                 return j;
